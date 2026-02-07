@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Achalugo ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('c:\Users\rozzy\Downloads\achalugo.jpeg.'); 
+            background-size: cover; /* Makes the image cover the whole page */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* No tiling */
+            color: white;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative; /* For overlay */
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 105, 180, 0.7), rgba(255, 20, 147, 0.7)); /* Semi-transparent pink overlay for readability */
+            z-index: 1;
+        }
+
+        .container {
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+            position: relative;
+            z-index: 2; /* Content above overlay */
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .buttons {
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            margin: 10px;
+        }
+
+        #yes {
+            background: #32cd32;
+            color: white;
+        }
+
+        #no {
+            background: #ff4500;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .gif {
+            width: 300px;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        p {
+            font-size: 1.5em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Falling hearts */
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: red;
+            animation: fall 5s linear infinite;
+            z-index: 2; /* Hearts above overlay */
+        }
+
+        @keyframes fall {
+            0% { top: -10%; opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will You Be My Valentine, Achalugo?</h1>
+        <div class="buttons">
+            <button id="yes">Yes ❤️</button>
+            <button id="no">No 😔</button>
+        </div>
+        <div id="reveal" class="hidden">
+            <img src="https://cdn.dribbble.com/userupload/21802127/file/original-7d9c23589fd5832e9349ad13342f11e5.gif" alt="Two bears hugging" class="gif">
+            <p>I know I hurt you in the past, Achalugo. I'll do better and improve. You're the best in the world. I love you so much, Yayyyy </p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const yesBtn = document.getElementById('yes');
+            const noBtn = document.getElementById('no');
+            const reveal = document.getElementById('reveal');
+            let noClicks = 0;
+            let yesScale = 1;
+
+            yesBtn.addEventListener('click', showReveal);
+
+            noBtn.addEventListener('click', () => {
+                noClicks++;
+                yesScale += 0.5;
+                yesBtn.style.transform = `scale(${yesScale})`;
+
+                if (noClicks >= 5) {
+                    showReveal();
+                    noBtn.style.display = 'none';
+                }
+            });
+
+            function showReveal() {
+                document.querySelector('.buttons').style.display = 'none';
+                document.querySelector('h1').style.display = 'none';
+                reveal.classList.remove('hidden');
+                reveal.style.animation = 'fadeIn 1s ease-in';
+            }
+
+            // Falling hearts
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+
+            setInterval(createHeart, 300);
+        });
+    </script>
+</body>
+</html>
